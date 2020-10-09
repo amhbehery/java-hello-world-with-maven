@@ -49,6 +49,7 @@ spec:
                     -Dsonar.projectKey="myandroid" \
                     -Dsonar.sources=. \
                     -Dsonar.pullrequest.branch=$CHANGE_BRANCH \
+                    -Dsonar.pullrequest.key=$BRANCH_NAME \
                     -Dsonar.pullrequest.base=development \
                     -Dsonar.sources=src/main/java/ \
                     -Dsonar.language=java \
