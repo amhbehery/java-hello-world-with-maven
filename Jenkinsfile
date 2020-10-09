@@ -43,6 +43,18 @@ spec:
                       echo "******"
                       sh "ls -l"
                       withSonarQubeEnv(credentialsId: 'asd') {
+                            if ( BRANCH_NAME ==~ /(PR.*)/)  {
+                                          sh '''
+                     sonar-scanner \
+                    -Dsonar.projectKey="myandroid" \
+                    -Dsonar.sources=. \
+                    -Dsonar.pullrequest.branch=$CHANGE_BRANCH \
+                    -Dsonar.pullrequest.base=development \
+                    -Dsonar.sources=src/main/java/ \
+                    -Dsonar.language=java \
+                    -Dsonar.java.binaries=./target/classes  
+                    '''
+                    }else{ 
                               sh '''
                      sonar-scanner \
                     -Dsonar.projectKey="myandroid" \
@@ -53,6 +65,7 @@ spec:
                     -Dsonar.java.binaries=./target/classes  
                     '''
                     }
+                      }
                     }
                 }
             }
